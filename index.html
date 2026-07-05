@@ -193,6 +193,56 @@
   .space-item h4{ font-family:'Oswald',sans-serif; font-size:1.6rem; margin:0.6rem 0; letter-spacing:0.05em; }
   .space-item p{ color:var(--concrete); font-size:0.95rem; font-weight:300; line-height:1.5; }
 
+  /* events slider */
+  .events-slider{
+    position:relative; margin-top:2px; background:#111;
+    border:1px solid var(--line); overflow:hidden;
+  }
+  .events-head{ padding:32px 40px 0; }
+  .events-head .eyebrow{ margin-bottom:0; }
+  .slider-viewport{ overflow:hidden; }
+  .slider-track{
+    display:flex;
+    transition:transform 0.7s cubic-bezier(.65,.05,.36,1);
+  }
+  .event-slide{
+    min-width:100%; box-sizing:border-box;
+    padding:48px 40px 64px; display:flex; flex-direction:column; gap:0.9rem;
+  }
+  .event-slide .tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem; letter-spacing:0.15em;
+    color:var(--red); text-transform:uppercase;
+  }
+  .event-slide h4{
+    font-family:'Oswald',sans-serif; font-weight:600;
+    font-size:clamp(1.6rem,4vw,2.4rem); letter-spacing:0.03em;
+  }
+  .event-slide .meta{
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--concrete);
+  }
+  .event-slide .desc{
+    color:var(--concrete); font-weight:300; max-width:620px; line-height:1.6; font-size:0.95rem;
+  }
+  .slider-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:transparent; border:none; cursor:pointer; padding:22px 16px; z-index:2;
+    color:var(--white); opacity:0.55; transition:opacity 0.25s, color 0.25s;
+  }
+  .slider-arrow:hover{ opacity:1; color:var(--red); }
+  .slider-arrow svg{ width:16px; height:auto; display:block; }
+  .slider-arrow svg path{ fill:currentColor; }
+  .slider-arrow.prev{ left:4px; }
+  .slider-arrow.prev svg{ transform:rotate(180deg); }
+  .slider-arrow.next{ right:4px; }
+  .slider-counter{
+    position:absolute; bottom:20px; right:32px;
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--concrete); letter-spacing:0.1em;
+  }
+  @media (max-width:768px){
+    .event-slide{ padding:36px 24px 56px; }
+    .events-head{ padding:24px 24px 0; }
+  }
+
   /* policy */
   .policy .not-list{ display:flex; flex-wrap:wrap; gap:1rem 2.5rem; margin-bottom:3rem; }
   .policy .not-list span{
@@ -332,6 +382,75 @@
     <div class="space-item"><span class="num">06</span><h4>VINYL</h4><p>Магазин пластинок.</p></div>
     <div class="space-item"><span class="num">07</span><h4>COURTYARD</h4><p>Летний двор.</p></div>
   </div>
+
+  <div class="events-slider reveal">
+    <div class="events-head"><span class="eyebrow">ближайшие события</span></div>
+    <div class="slider-viewport">
+      <div class="slider-track" id="eventsTrack">
+        <div class="event-slide">
+          <span class="tag">MAIN · 01</span>
+          <h4>НОЧНОЙ ПРИВОЗ</h4>
+          <div class="meta">12 июля · 23:00 — 06:00</div>
+          <p class="desc">Ночной марафон техно и индастриал на главной сцене. Что привезли — то и играет: состав не анонсируется заранее.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">HANGAR · 02</span>
+          <h4>ЖИВОЙ МОДУЛЬ</h4>
+          <div class="meta">18 июля · 22:00</div>
+          <p class="desc">Live-сет на модульных синтезаторах. Индустриальная сцена, минимум света, максимум звука.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">RADIO · 03</span>
+          <h4>ПРЯМОЙ ЭФИР</h4>
+          <div class="meta">20 июля · 20:00 — 02:00</div>
+          <p class="desc">Шестичасовой радиомарафон резидентов РЫНКА. Слушать можно из любой точки — вещание открытое.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">GALLERY · 04</span>
+          <h4>ВЕРНИСАЖ</h4>
+          <div class="meta">25 июля · 18:00</div>
+          <p class="desc">Открытие выставки медиахудожников Арктики. Без фуршета, без речей — только работы.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">LAB · 05</span>
+          <h4>ЛАБОРАТОРИЯ ЗВУКА</h4>
+          <div class="meta">27 июля · 16:00</div>
+          <p class="desc">Практический воркшоп по саунд-дизайну и модульному синтезу. Мест ограниченно.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">VINYL · 06</span>
+          <h4>ВИНИЛ ДЕНЬ</h4>
+          <div class="meta">2 августа · 14:00 — 20:00</div>
+          <p class="desc">Маркет пластинок, диджей-сеты на виниле, обмен и продажа между резидентами.</p>
+        </div>
+        <div class="event-slide">
+          <span class="tag">COURTYARD · 07</span>
+          <h4>ДВОР ОТКРЫТ</h4>
+          <div class="meta">каждую субботу · 12:00</div>
+          <p class="desc">Дневной формат во дворе: кофе, пластинки, разговоры без нагрузки.</p>
+        </div>
+      </div>
+    </div>
+    <button class="slider-arrow prev" onclick="moveSlide(-1)" aria-label="Предыдущее событие">
+      <svg viewBox="0 0 182 227" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 226.998L56.093 178.998L67 187.998L0 226.998Z"/>
+        <path d="M73 165.498L100.931 139.998L118 157.998L82.3103 178.998L73 165.498Z"/>
+        <path d="M84.0072 64.4016L118.144 81.6591L102.493 102.124L73.1185 76.5584L84.0072 64.4016Z"/>
+        <path d="M3.0999 15.7764L69.9917 55.2859L62.2142 67.4427L3.0999 15.7764Z"/>
+        <path d="M112 110.998L132.222 90.998L182 120.229L129.111 150.998L112 129.46L121.333 120.229L112 110.998Z"/>
+      </svg>
+    </button>
+    <button class="slider-arrow next" onclick="moveSlide(1)" aria-label="Следующее событие">
+      <svg viewBox="0 0 182 227" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 226.998L56.093 178.998L67 187.998L0 226.998Z"/>
+        <path d="M73 165.498L100.931 139.998L118 157.998L82.3103 178.998L73 165.498Z"/>
+        <path d="M84.0072 64.4016L118.144 81.6591L102.493 102.124L73.1185 76.5584L84.0072 64.4016Z"/>
+        <path d="M3.0999 15.7764L69.9917 55.2859L62.2142 67.4427L3.0999 15.7764Z"/>
+        <path d="M112 110.998L132.222 90.998L182 120.229L129.111 150.998L112 129.46L121.333 120.229L112 110.998Z"/>
+      </svg>
+    </button>
+    <div class="slider-counter" id="sliderCounter">01 / 07</div>
+  </div>
 </section>
 
 <!-- POLICY -->
@@ -387,6 +506,33 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el=>io.observe(el));
+
+  // events slider
+  (function(){
+    const track = document.getElementById('eventsTrack');
+    const counter = document.getElementById('sliderCounter');
+    if(!track) return;
+    const total = track.children.length;
+    let index = 0;
+    let timer;
+
+    function render(){
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      counter.textContent = String(index+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    }
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(()=>go(1), 7000);
+    }
+    function go(delta){
+      index = (index + delta + total) % total;
+      render();
+      resetTimer();
+    }
+    window.moveSlide = go;
+    render();
+    resetTimer();
+  })();
 </script>
 
 </body>
